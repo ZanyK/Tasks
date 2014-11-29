@@ -1,0 +1,35 @@
+<h1>Listing tasks</h1>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Date</th>
+      <th>Deadline</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tasks.each do |task| %>
+    <% if task.done == true %>
+    <tr class="success">
+    <% else %>
+    <tr class="danger">
+    <% end %>
+        <td><%= task.name %></td>
+        <td><%= my_time(task.date) %></td>
+        <td><%= my_time(task.deadline) %></td>
+        <td><%= link_to 'Show', task %></td>
+        <td class="tuzka"><%= link_to(image_tag("pencil.png"), edit_task_path(task)) %></td>
+        <td class="tuzka"><%= link_to(image_tag("cross.png"), task, method: :delete, data: { confirm: 'Are you sure?' }) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Task', new_task_path %>
